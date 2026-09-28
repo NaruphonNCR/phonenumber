@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ถามเบอร์ภายใน รพ.พุทธโสธร</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☎️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style id="css">
+:root{
+  --bg:#EAF2EE; --surface:#FFFFFF; --ink:#15231F; --muted:#56706A; --line:#CFE0D8;
+  --brand:#0E4D45; --brand-ink:#FFFFFF; --plate:#F7FBF9; --signal:#E3A23A; --user:#0E4D45;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1A18; --surface:#16241F; --ink:#E6F0EC; --muted:#93AFA7; --line:#27403A;
+    --brand:#5FC0AE; --brand-ink:#0B1714; --plate:#1C2E29; --signal:#F0B758; --user:#2B6E63;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1A18; --surface:#16241F; --ink:#E6F0EC; --muted:#93AFA7; --line:#27403A;
+  --brand:#5FC0AE; --brand-ink:#0B1714; --plate:#1C2E29; --signal:#F0B758; --user:#2B6E63;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans Thai","Sarabun","Leelawadee UI","Thonburi",system-ui,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+.app{display:flex;flex-direction:column;height:100%;max-width:760px;margin:0 auto}
+
+header{padding:18px 18px 0}
+.title{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h1{font-size:1.45rem;line-height:1.25;margin:0;font-weight:700;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:.9rem;margin:2px 0 0}
+.tabs{display:flex;gap:4px;margin-top:14px;border-bottom:1px solid var(--line)}
+.tab{background:none;border:0;padding:8px 14px;cursor:pointer;color:var(--muted);font-weight:500;
+  border-bottom:3px solid transparent;margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--brand)}
+.tab:focus-visible,.chip:focus-visible,.ext:focus-visible,.send:focus-visible,.ask-ai:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+
+main{flex:1;overflow-y:auto;padding:16px 18px 8px}
+.panel[hidden]{display:none}
+
+.msg{margin:0 0 16px}
+.bubble-user{margin-left:auto;max-width:80%;width:fit-content;background:var(--user);color:#fff;
+  padding:8px 14px;border-radius:16px 16px 4px 16px}
+.bot-text{color:var(--ink);margin:0 0 8px;white-space:pre-wrap}
+.bot-note{color:var(--muted);font-size:.88rem;margin:6px 0 0}
+
+.entry{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 8px;
+  display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}
+.entry .name{font-weight:600;line-height:1.35}
+.entry .where{color:var(--muted);font-size:.85rem;grid-column:1}
+.exts{grid-column:2;grid-row:1 / span 2;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;max-width:210px}
+.ext{background:var(--plate);border:1.5px solid var(--brand);color:var(--ink);border-radius:8px;
+  padding:3px 10px;font-size:1.3rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.03em;cursor:pointer;line-height:1.3}
+.ext:active{transform:scale(.97)}
+@media (max-width:420px){
+  .entry{grid-template-columns:1fr}
+  .exts{grid-column:1;grid-row:auto;justify-content:flex-start;max-width:none;margin-top:4px}
+}
+
+.welcome h2{font-size:1.1rem;margin:4px 0 6px}
+.welcome p{margin:0 0 12px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:.92rem}
+.chip:hover{border-color:var(--brand)}
+
+.ask-ai{background:none;border:1.5px dashed var(--brand);color:var(--brand);border-radius:10px;padding:6px 14px;cursor:pointer;margin-top:4px;font-weight:500}
+.thinking{color:var(--muted);font-style:italic}
+
+footer{padding:10px 18px 14px;border-top:1px solid var(--line);background:var(--bg)}
+.inputrow{display:flex;gap:8px}
+.inputrow input{flex:1;min-width:0;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:11px 14px}
+.inputrow input:focus{outline:none;border-color:var(--brand)}
+.send{background:var(--brand);color:var(--brand-ink);border:0;border-radius:12px;padding:0 18px;font-weight:600;cursor:pointer}
+.hint{color:var(--muted);font-size:.8rem;margin:6px 2px 0}
+
+/* directory */
+.filter{width:100%;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.filter:focus{outline:none;border-color:var(--brand)}
+details.bld{margin:0 0 10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+details.bld summary{cursor:pointer;padding:12px 14px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:8px}
+details.bld summary::-webkit-details-marker{display:none}
+details.bld summary .count{color:var(--muted);font-weight:400;font-size:.88rem}
+.floor{padding:0 14px 8px}
+.floor h3{font-size:.85rem;color:var(--brand);margin:8px 0 4px;font-weight:600}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;border-top:1px solid var(--line)}
+.row .n{line-height:1.35}
+.row .exts{max-width:none}
+.row .ext{font-size:1.02rem;padding:1px 8px}
+
+ /* admin */
+.admin-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.admin-bar .filter{flex:1;min-width:180px;margin:0}
+.btn{background:var(--brand);color:var(--brand-ink);border:0;border-radius:10px;padding:9px 16px;font-weight:600;cursor:pointer}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn.danger{background:none;color:#B3261E;border:1px solid #B3261E}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.edit:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.arow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:6px}
+.arow .n{font-weight:500;line-height:1.35}
+.arow .meta{color:var(--muted);font-size:.82rem}
+.arow .nums{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.edit{background:none;border:1px solid var(--brand);color:var(--brand);border-radius:8px;padding:3px 12px;cursor:pointer;font-size:.88rem}
+.form{background:var(--surface);border:1.5px solid var(--brand);border-radius:12px;padding:14px;margin-bottom:14px}
+.form h3{margin:0 0 10px;font-size:1rem}
+.form label{display:block;font-size:.85rem;color:var(--muted);margin:8px 0 3px}
+.form input{width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:9px 12px}
+.form input:focus{outline:none;border-color:var(--brand)}
+.form .two{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.form .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.form .err{color:#B3261E;font-size:.88rem;margin:8px 0 0;min-height:1em}
+.status{color:var(--muted);font-size:.85rem;margin:0 0 10px}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<script type="application/json" id="dir-data">{"entries":[]}</script>
+<script id="app">const HEAD_SRC="<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>ถามเบอร์ภายใน รพ.พุทธโสธร<\/title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap\" rel=\"stylesheet\">";
+const CSS_SRC=document.getElementById("css").textContent;
+const APP_SRC=document.getElementById("app").textContent;
+document.body.insertAdjacentHTML("afterbegin","<div class=\"app\">\n  <header>\n    <div class=\"title\">\n      <h1>ถามเบอร์ภายใน<\/h1>\n    <\/div>\n    <p class=\"sub\">โรงพยาบาลพุทธโสธร ข้อมูลจากงานประชาสัมพันธ์ ฉบับ 19 มี.ค. 2569<\/p>\n    <div class=\"tabs\" role=\"tablist\">\n      <button class=\"tab\" role=\"tab\" id=\"tab-ask\" aria-selected=\"true\" aria-controls=\"panel-ask\">ถามหาเบอร์<\/button>\n      <button class=\"tab\" role=\"tab\" id=\"tab-book\" aria-selected=\"false\" aria-controls=\"panel-book\">สมุดโทรศัพท์<\/button>\n      <button class=\"tab\" role=\"tab\" id=\"tab-admin\" aria-selected=\"false\" aria-controls=\"panel-admin\" hidden>จัดการเบอร์ (Admin)<\/button>\n    <\/div>\n  <\/header>\n\n  <main id=\"scroller\">\n    <section class=\"panel\" id=\"panel-ask\" role=\"tabpanel\" aria-labelledby=\"tab-ask\">\n      <div id=\"thread\" aria-live=\"polite\">\n        <div class=\"msg welcome\">\n          <h2>อยากติดต่อหน่วยงานไหน<\/h2>\n          <p>พิมพ์ชื่อหน่วยงาน คำสั้นๆ หรือถามแบบปกติก็ได้ เช่น \"คอมเสียโทรไหน\" หรือพิมพ์เลขเบอร์เพื่อดูว่าเป็นของหน่วยงานใด แตะที่เบอร์เพื่อคัดลอก<\/p>\n          <div class=\"chips\" id=\"suggest\"><\/div>\n        <\/div>\n      <\/div>\n    <\/section>\n    <section class=\"panel\" id=\"panel-admin\" role=\"tabpanel\" aria-labelledby=\"tab-admin\" hidden>\n      <p class=\"status\" id=\"adminStatus\">แก้ไขแล้วบันทึก ข้อมูลจะอัปเดตให้ทุกคนที่เปิดหน้านี้ทันที<\/p>\n      <div id=\"formBox\"><\/div>\n      <div class=\"admin-bar\">\n        <input class=\"filter\" id=\"afilter\" type=\"search\" placeholder=\"ค้นหาหน่วยงานที่จะแก้ไข\" aria-label=\"ค้นหาหน่วยงานที่จะแก้ไข\">\n        <button class=\"btn\" type=\"button\" id=\"addBtn\">+ เพิ่มหน่วยงาน<\/button>\n      <\/div>\n      <div id=\"alist\"><\/div>\n    <\/section>\n    <section class=\"panel\" id=\"panel-book\" role=\"tabpanel\" aria-labelledby=\"tab-book\" hidden>\n      <input class=\"filter\" id=\"filter\" type=\"search\" placeholder=\"กรองรายชื่อ เช่น หัวหน้า, ห้องประชุม, 18\" aria-label=\"กรองรายชื่อ\">\n      <div id=\"book\"><\/div>\n    <\/section>\n  <\/main>\n\n  <footer id=\"composer\">\n    <form class=\"inputrow\" id=\"form\" autocomplete=\"off\">\n      <input id=\"q\" type=\"text\" placeholder=\"เช่น คลังยา, แล็บ, ไอซียูเด็ก, 1815\" aria-label=\"คำถาม\">\n      <button class=\"send\" type=\"submit\">ค้นหา<\/button>\n    <\/form>\n    <p class=\"hint\" id=\"aihint\">ค้นจากคีย์เวิร์ดทันที ถ้าหาไม่เจอจะให้ AI ช่วยตีความคำถาม<\/p>\n  <\/footer>\n<\/div>\n<div class=\"toast\" id=\"toast\" role=\"status\"><\/div>\n");
+
+/* ---------- ข้อมูล (อ่านจาก <script id="dir-data">) ---------- */
+let DATA=[], STORE={entries:[],updatedAt:null};
+try{STORE=JSON.parse(document.getElementById("dir-data").textContent)}catch(e){}
+/* ---------- คำพ้อง / ภาษาพูด ---------- */
+const SYN={
+ "คอม":["ศูนย์คอมพิวเตอร์"],"ไอที":["ศูนย์คอมพิวเตอร์"],"it":["ศูนย์คอมพิวเตอร์"],"เน็ต":["ศูนย์คอมพิวเตอร์"],"hosxp":["ศูนย์คอมพิวเตอร์"],
+ "ยา":["เภสัช","จ่ายยา"],"ยาม":["ยาม"],"รปภ.":["ยาม"],"หมอ":["แพทย์"],"เด็ก":["กุมาร"],"ผ่าตัด":["or"],"แล็บ":["lab"],"แลป":["lab"],"แลบ":["lab"],
+ "ฟัน":["ทันตกรรม"],"เอ็กซเรย์":["x-ray"],"เอกซเรย์":["x-ray"],"xray":["x-ray"],"อัลตร้า":["อัลตราซาวนด์"],"ultrasound":["อัลตราซาวนด์"],
+ "ท้อง":["ฝากครรภ์","สูติ"],"คลอด":["ห้องคลอด"],"ไต":["ไตเทียม"],"หัวใจ":["ccu","echo","ekg"],"จ่ายเงิน":["เก็บเงิน"],
+ "ผอ":["ผู้อำนวยการ"],"รปภ":["ยาม"],"ไฟดับ":["ช่างไฟฟ้า"],"น้ำไม่ไหล":["ช่างประปา"],"แอร์":["ช่างแอร์"],"ครัว":["โภชนาการ"],
+ "ซักผ้า":["ซักฟอก"],"รถพยาบาล":["ยานพาหนะ"],"จิต":["จิตเวช"],"กระดูก":["ออร์โธ"],"ไอซียู":["icu","ไอ.ซี.ยู"],"icu":["ไอ.ซี.ยู","ไอซียู"],
+ "ฉุกเฉิน":["er"],"อุบัติเหตุ":["er","ห้องฉุกเฉิน"],"ส่งต่อ":["refer"],"hr":["บุคลากร"],"ประชุม":["ห้องประชุม"],"ศพ":["นิติเวช","สุขคติ"],
+ "ซ่อม":["ช่าง"],"ward":["หอผู้ป่วย"],"วอร์ด":["หอผู้ป่วย","ward"],"ตึก":["หอผู้ป่วย"],"ส่องกล้อง":["ส่องกล้อง"]
+};
+const FILLER=["อยากได้","อยาก","ต้องการ","ขอเบอร์","เบอร์โทร","เบอร์","หมายเลข","โทรศัพท์","โทรหา","โทรไป","โทร","ติดต่อ","ภายใน","อยากทราบ","อยากรู้","ช่วยหา","หาให้หน่อย",
+ "หน่อยครับ","หน่อยค่ะ","หน่อย","ครับ","ค่ะ","คะ","จ้า","นะ","เท่าไหร่","เท่าไร","อะไร","ยังไง","ที่ไหน","ไหน","ของ","คือ","มีไหม","ได้ไหม","ไหม","ขอ","แผนก","หน่วยงาน","ฝ่าย"];
+
+const norm=s=>s.toLowerCase().replace(/[\s.\-+\/()]/g,"");
+function setData(list){
+  DATA=list.map((e,i)=>{const d={id:String(e.id),b:String(e.b||""),f:String(e.f||"-"),n:String(e.n||""),
+    x:(Array.isArray(e.x)?e.x:String(e.x||"").split(",")).map(s=>String(s).trim()).filter(Boolean),k:String(e.k||""),i};
+    d.hn=norm(d.n);d.hay=norm(d.n+" "+d.k+" "+d.b+" "+d.f);return d});
+  if(window.__ready){renderBook($("#filter").value);renderAdmin()}
+}
+setData(STORE.entries||[]);
+
+function bigrams(s){const a=new Set();for(let i=0;i<s.length-1;i++)a.add(s.slice(i,i+2));return a}
+function dice(a,b){if(!a.size||!b.size)return 0;let m=0;a.forEach(g=>{if(b.has(g))m++});return 2*m/(a.size+b.size)}
+
+function search(qRaw){
+  const q=qRaw.trim();
+  const digits=q.match(/\d{3,5}/g);
+  if(digits){
+    const hits=DATA.filter(d=>digits.some(n=>d.x.some(x=>x===n||x.startsWith(n))));
+    if(hits.length) return {mode:"number",items:hits.slice(0,12)};
+  }
+  let c=" "+q.toLowerCase()+" ";
+  FILLER.forEach(f=>{c=c.split(f).join(" ")});
+  const words=c.split(/\s+/).filter(Boolean);
+  const cleaned=norm(words.join(""));
+  if(!cleaned) return {mode:"empty",items:[]};
+  const terms=new Set(words.map(norm).filter(Boolean));
+  const synBase=cleaned.replace(/พยาบาล|ยาม|ยานพาหนะ|บริจาค|ปวด/g,"|");
+  Object.keys(SYN).forEach(k=>{if(synBase.includes(norm(k)))SYN[k].forEach(s=>terms.add(norm(s)))});
+  const qb=bigrams(cleaned);
+  const scored=DATA.map(d=>{
+    let s=0;
+    if(d.hn===cleaned)s+=100;
+    else if(d.hn.includes(cleaned))s+=40+cleaned.length;
+    else if(d.hay.includes(cleaned))s+=25+cleaned.length;
+    terms.forEach(t=>{if(t.length<2&&!/[a-z]/.test(t))return;
+      if(d.hn.includes(t))s+=8+t.length*1.5; else if(d.hay.includes(t))s+=4+t.length;});
+    s+=dice(qb,bigrams(d.hn))*30;
+    // ถ้าไม่ได้ถามหาหัวหน้า ให้หน่วยงานหลักขึ้นก่อน
+    if(!cleaned.includes("หัวหน้")&&d.hn.includes("หัวหน้า"))s-=6;
+    if(!cleaned.includes("พักแพทย์")&&d.hn.includes("พักแพทย์"))s-=4;
+    return {d,s};
+  }).filter(o=>o.s>=14).sort((a,b)=>b.s-a.s);
+  if(!scored.length) return {mode:"none",items:[]};
+  const top=scored[0].s;
+  return {mode:"text",items:scored.filter(o=>o.s>=Math.max(14,top*0.45)).slice(0,8).map(o=>o.d),strong:top>=30};
+}
+
+/* ---------- UI ---------- */
+const $=s=>document.querySelector(s);
+const thread=$("#thread"),scroller=$("#scroller");
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+function extBtn(x,name){const b=el("button","ext",x);b.type="button";b.setAttribute("aria-label","คัดลอกเบอร์ "+x+" "+name);
+  b.onclick=()=>copy(x);return b}
+function entryCard(d){
+  const c=el("div","entry");c.append(el("div","name",d.n));
+  const w=el("div","where",d.b+(d.f&&d.f!=="-"?" "+d.f:""));c.append(w);
+  const xs=el("div","exts");d.x.forEach(x=>xs.append(extBtn(x,d.n)));c.append(xs);return c}
+let toastT;
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),1600)}
+function copy(x){
+  const done=()=>toast("คัดลอก "+x+" แล้ว");
+  try{navigator.clipboard.writeText(x).then(done,()=>fallbackCopy(x,done))}catch(e){fallbackCopy(x,done)}
+}
+function fallbackCopy(x,done){const t=document.createElement("textarea");t.value=x;document.body.append(t);t.select();
+  try{document.execCommand("copy");done()}catch(e){toast("เบอร์ "+x)}t.remove()}
+function scrollDown(){requestAnimationFrame(()=>{scroller.scrollTop=scroller.scrollHeight})}
+
+const SUGG=["คลังยา","ศูนย์คอมพิวเตอร์","ห้องฉุกเฉิน","แล็บ","ไอซียูเด็ก","แอร์เสียโทรไหน","ห้องผู้อำนวยการ","1815"];
+SUGG.forEach(s=>{const b=el("button","chip",s);b.type="button";b.onclick=()=>ask(s);$("#suggest").append(b)});
+
+let samplePromise=null, aiOff=false;
+function getSample(){
+  if(!samplePromise){
+    samplePromise=(window.claude&&typeof window.claude.use==="function")?window.claude.use("sample").catch(()=>null):Promise.resolve(null);
+    samplePromise.then(s=>{if(!s){aiOff=true;$("#aihint").textContent="ค้นหาจากคีย์เวิร์ดและคำพ้อง แตะที่เบอร์เพื่อคัดลอก"}});
+  }
+  return samplePromise;
+}
+getSample();
+
+function ask(q){
+  q=q.trim();if(!q)return;
+  const m=el("div","msg");m.append(el("div","bubble-user",q));thread.append(m);
+  const r=search(q);const bot=el("div","msg");thread.append(bot);
+  if(r.items.length){
+    bot.append(el("p","bot-text",r.mode==="number"?"เบอร์นี้เป็นของ":(r.items.length===1?"เจอ 1 รายการ":"เจอ "+r.items.length+" รายการที่เกี่ยวข้อง")));
+    r.items.forEach(d=>bot.append(entryCard(d)));
+    if(!aiOff&&r.mode==="text"&&!r.strong){
+      const b=el("button","ask-ai","ยังไม่ใช่ ให้ AI ช่วยหา");b.type="button";b.onclick=()=>{b.remove();aiAsk(q,bot)};bot.append(b);
+    }
+  }else if(!aiOff){
+    aiAsk(q,bot);
+  }else{
+    bot.append(el("p","bot-text","ไม่พบหน่วยงานที่ตรงกับ \""+q+"\" ลองพิมพ์ชื่อสั้นลง หรือเปิดแท็บสมุดโทรศัพท์เพื่อดูทั้งหมด"));
+  }
+  scrollDown();
+}
+
+async function aiAsk(q,box){
+  const p=el("p","bot-text thinking","กำลังให้ AI ช่วยตีความคำถาม...");box.append(p);scrollDown();
+  const sample=await getSample();
+  if(!sample){p.className="bot-text";p.textContent="ไม่พบหน่วยงานที่ตรงกับ \""+q+"\" ลองพิมพ์ชื่อสั้นลง หรือเปิดแท็บสมุดโทรศัพท์";return}
+  const dir=DATA.map(d=>d.i+"|"+d.n+"|"+d.b+" "+d.f+"|"+d.x.join(",")).join("\n");
+  const prompt="คุณเป็นพนักงานโอเปอเรเตอร์ของโรงพยาบาลพุทธโสธร ตอบคำถามเรื่องเบอร์โทรภายในโดยใช้เฉพาะสมุดโทรศัพท์ด้านล่างเท่านั้น ห้ามเดาเบอร์ที่ไม่มีในรายการ\n"+
+    "ผู้ใช้อาจพิมพ์ภาษาพูด ย่อ สะกดผิด หรืออธิบายปัญหา (เช่น คอมเสีย = ศูนย์คอมพิวเตอร์, น้ำไม่ไหล = ช่างประปา) ให้เลือกหน่วยงานที่เหมาะที่สุด 1-5 รายการ\n"+
+    "ตอบเป็น JSON เท่านั้น รูปแบบ {\"answer\":\"ข้อความสั้นๆ ภาษาไทย 1-2 ประโยค ไม่ต้องใส่เบอร์ในข้อความ\",\"ids\":[ตัวเลข id]} ถ้าไม่มีหน่วยงานที่เกี่ยวข้องเลยให้ ids เป็น [] และบอกในคำตอบ\n\n"+
+    "สมุดโทรศัพท์ (id|ชื่อ|ที่ตั้ง|เบอร์):\n"+dir+"\n\nคำถาม: "+q;
+  try{
+    const res=await sample.json(prompt,{modelTier:"quick"});
+    const ids=Array.isArray(res&&res.ids)?res.ids.map(Number).filter(i=>DATA[i]):[];
+    p.className="bot-text";p.textContent=(res&&res.answer)||(ids.length?"หน่วยงานที่น่าจะใช่":"ไม่พบหน่วยงานที่เกี่ยวข้อง");
+    ids.slice(0,5).forEach(i=>box.append(entryCard(DATA[i])));
+    box.append(el("p","bot-note","คำตอบจาก AI เลือกจากสมุดโทรศัพท์ของโรงพยาบาลเท่านั้น"));
+  }catch(e){
+    p.className="bot-text";
+    if(e&&e.code==="not_granted"){aiOff=true;p.textContent="ไม่พบจากคีย์เวิร์ด และยังไม่ได้อนุญาตให้ใช้ AI ลองพิมพ์ชื่อหน่วยงานให้สั้นลง หรือดูในแท็บสมุดโทรศัพท์"}
+    else if(e&&e.code==="rate_limited"){p.textContent="มีคำถามถึง AI มากเกินไปในช่วงนี้ รอสักครู่แล้วลองใหม่"}
+    else{p.textContent="ไม่พบจากคีย์เวิร์ด และ AI ตอบไม่สำเร็จ ลองพิมพ์ชื่อหน่วยงานให้สั้นลง หรือดูในแท็บสมุดโทรศัพท์"}
+  }
+  scrollDown();
+}
+
+$("#form").addEventListener("submit",e=>{e.preventDefault();const i=$("#q");ask(i.value);i.value=""});
+
+/* ---------- สมุดโทรศัพท์ ---------- */
+function renderBook(f){
+  const box=$("#book");box.textContent="";
+  const fq=norm(f||"");
+  const groups=new Map();
+  DATA.forEach(d=>{
+    if(fq&&!(d.hay.includes(fq)||d.x.some(x=>x.includes(fq))))return;
+    if(!groups.has(d.b))groups.set(d.b,new Map());
+    const g=groups.get(d.b);if(!g.has(d.f))g.set(d.f,[]);g.get(d.f).push(d);
+  });
+  if(!groups.size){box.append(el("p","bot-text","ไม่มีรายการที่ตรงกับคำที่กรอง"));return}
+  groups.forEach((floors,b)=>{
+    const det=el("details","bld");if(fq)det.open=true;
+    const sm=el("summary");let n=0;floors.forEach(a=>n+=a.length);
+    sm.append(el("span","",b),el("span","count",n+" หน่วยงาน"));det.append(sm);
+    floors.forEach((list,f)=>{
+      const fl=el("div","floor");if(f!=="-")fl.append(el("h3","",f));
+      list.forEach(d=>{const r=el("div","row");r.append(el("span","n",d.n));const xs=el("div","exts");
+        d.x.forEach(x=>xs.append(extBtn(x,d.n)));r.append(xs);fl.append(r)});
+      det.append(fl);
+    });
+    box.append(det);
+  });
+}
+window.__ready=true;
+fetch("data.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(v=>{setData(v.entries||[])}).catch(()=>{$(".sub").textContent="โหลดข้อมูลเบอร์ไม่สำเร็จ ลองรีเฟรชหน้าอีกครั้ง"});
+if(STORE.updatedAt){const t=new Date(STORE.updatedAt);if(!isNaN(t))$(".sub").textContent="โรงพยาบาลพุทธโสธร ปรับปรุงข้อมูลล่าสุด "+t.toLocaleDateString("th-TH",{day:"numeric",month:"short",year:"numeric"})+" "+t.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"})+" น."}
+renderBook("");
+$("#filter").addEventListener("input",e=>renderBook(e.target.value));
+
+/* ---------- Admin ---------- */
+var art=null, isAdmin=false, editing=null, saving=false;
+function plain(d){return {id:d.id,b:d.b,f:d.f,n:d.n,x:d.x,k:d.k}}
+function renderAdmin(){
+  if(!isAdmin)return;
+  const box=$("#alist");box.textContent="";
+  const fq=norm($("#afilter").value||"");
+  const list=DATA.filter(d=>!fq||d.hay.includes(fq)||d.x.some(x=>x.includes(fq)));
+  list.forEach(d=>{
+    const r=el("div","arow");const l=el("div");l.append(el("div","n",d.n),el("div","meta",d.b+(d.f!=="-"?" "+d.f:"")));
+    const right=el("div");right.style.cssText="display:flex;gap:10px;align-items:center";
+    right.append(el("span","nums",d.x.join(", ")));
+    const b=el("button","edit","แก้ไข");b.type="button";b.onclick=()=>openForm(d);right.append(b);
+    r.append(l,right);box.append(r);
+  });
+  if(!list.length)box.append(el("p","bot-text","ไม่พบหน่วยงาน"));
+}
+function field(label,id,val,ph,list){const w=el("div");const l=el("label",null,label);l.htmlFor=id;
+  const i=el("input");i.id=id;i.value=val||"";if(ph)i.placeholder=ph;if(list)i.setAttribute("list",list);w.append(l,i);return w}
+function openForm(d){
+  editing=d?d.id:null;const box=$("#formBox");box.textContent="";
+  const f=el("div","form");f.append(el("h3",null,d?"แก้ไข: "+d.n:"เพิ่มหน่วยงานใหม่"));
+  const dl=el("datalist");dl.id="blds";[...new Set(DATA.map(x=>x.b))].forEach(b=>{const o=el("option");o.value=b;dl.append(o)});f.append(dl);
+  f.append(field("ชื่อหน่วยงาน","fN",d&&d.n,"เช่น คลังยา"));
+  const two=el("div","two");two.append(field("อาคาร","fB",d&&d.b,"เลือกหรือพิมพ์ใหม่","blds"),field("ชั้น","fF",d&&d.f!=="-"?d.f:"","เช่น ชั้น 5"));f.append(two);
+  f.append(field("เบอร์ภายใน (คั่นด้วย , ถ้ามีหลายเบอร์)","fX",d&&d.x.join(", "),"เช่น 1815, 1816"));
+  f.append(field("คีย์เวิร์ดช่วยค้นหา (ไม่บังคับ)","fK",d&&d.k,"เช่น ยา เภสัช เบิกยา"));
+  const err=el("p","err");err.id="fErr";f.append(err);
+  const acts=el("div","acts");
+  const sv=el("button","btn","บันทึก");sv.type="button";sv.onclick=saveForm;
+  const cc=el("button","btn ghost","ยกเลิก");cc.type="button";cc.onclick=closeForm;acts.append(sv,cc);
+  if(d){const del=el("button","btn danger","ลบหน่วยงานนี้");del.type="button";del.onclick=()=>delEntry(d);acts.append(del)}
+  f.append(acts);box.append(f);$("#fN").focus();scroller.scrollTop=0;
+}
+function closeForm(){editing=null;$("#formBox").textContent=""}
+function buildPage(list){
+  const data=JSON.stringify({entries:list,updatedAt:new Date().toISOString()}).replace(/\x3c/g,"\\u003c");
+  return "<!DOCTYPE html>\n<html lang=\"th\">\n<head>\n"+HEAD_SRC+"\n<style id=\"css\">"+CSS_SRC+"<\/style>\n<\/head>\n<body>\n<script type=\"application/json\" id=\"dir-data\">"+data+"<\/script>\n<script id=\"app\">"+APP_SRC+"<\/script>\n<\/body>\n<\/html>\n";
+}
+function readOnly(){isAdmin=false;$("#tab-admin").hidden=true;closeForm();setTab("ask");toast("บัญชีนี้ดูได้อย่างเดียว แก้ไขไม่ได้")}
+async function write(list,msg){
+  if(saving||!art)return false;saving=true;
+  const er=$("#fErr");if(er)er.textContent="กำลังบันทึก...";
+  try{sessionStorage.setItem("pd-toast",msg)}catch(e){}
+  try{await art.publish(buildPage(list));return true}
+  catch(e){
+    try{sessionStorage.removeItem("pd-toast")}catch(_){}
+    const c=e&&e.code;
+    if(c==="not_writer"||c==="not_granted"||c==="not_declared"){readOnly();return false}
+    const m=c==="conflict"?"มีคนแก้ไขพร้อมกัน หน้านี้จะโหลดข้อมูลล่าสุด แล้วลองแก้อีกครั้ง":c==="rate_limited"?"บันทึกถี่เกินไป รอสักครู่แล้วลองใหม่":"บันทึกไม่สำเร็จ ("+(c||"error")+") ลองใหม่อีกครั้ง";
+    const er2=$("#fErr");if(er2)er2.textContent=m;else toast(m);return false}
+  finally{saving=false}
+}
+async function saveForm(){
+  const n=$("#fN").value.trim(),b=$("#fB").value.trim(),f=$("#fF").value.trim()||"-",k=$("#fK").value.trim();
+  const x=$("#fX").value.split(/[,，\s]+/).map(s=>s.trim()).filter(Boolean);
+  const er=$("#fErr");
+  if(!n){er.textContent="กรุณาใส่ชื่อหน่วยงาน";return}
+  if(!b){er.textContent="กรุณาใส่อาคาร";return}
+  if(!x.length){er.textContent="กรุณาใส่เบอร์อย่างน้อย 1 เบอร์";return}
+  if(x.some(v=>!/^\d{3,6}$/.test(v))){er.textContent="เบอร์ต้องเป็นตัวเลข 3-6 หลัก";return}
+  let list=DATA.map(plain);
+  if(editing){list=list.map(e=>e.id===editing?{...e,n,b,f,x,k}:e)}
+  else{list.push({id:"e"+Date.now().toString(36),n,b,f,x,k})}
+  if(await write(list,editing?"บันทึกการแก้ไขแล้ว":"เพิ่ม "+n+" แล้ว"))closeForm();
+}
+async function delEntry(d){
+  if(!confirm("ลบ \""+d.n+"\" ออกจากสมุดโทรศัพท์?"))return;
+  if(await write(DATA.filter(e=>e.id!==d.id).map(plain),"ลบ "+d.n+" แล้ว"))closeForm();
+}
+$("#addBtn").onclick=()=>openForm(null);
+$("#afilter").addEventListener("input",renderAdmin);
+
+(async()=>{
+  try{const t=sessionStorage.getItem("pd-toast");if(t){sessionStorage.removeItem("pd-toast");setTimeout(()=>toast(t),300)}}catch(e){}
+  if(!window.claude||typeof window.claude.use!=="function")return;
+  art=await window.claude.use("artifact").catch(()=>null);
+  if(!art)return;
+  const user=await window.claude.use("user").catch(()=>null);
+  isAdmin=user?await user.canEdit().catch(()=>false):false;
+  if(isAdmin){$("#tab-admin").hidden=false;renderAdmin()}
+})();
+
+function setTab(which){
+  const ask=which==="ask";
+  ["ask","book","admin"].forEach(t=>{$("#tab-"+t).setAttribute("aria-selected",t===which);$("#panel-"+t).hidden=t!==which});
+  $("#composer").hidden=!ask;
+  scroller.scrollTop=ask?scroller.scrollHeight:0;
+}
+$("#tab-ask").onclick=()=>setTab("ask");$("#tab-book").onclick=()=>setTab("book");$("#tab-admin").onclick=()=>setTab("admin");
+</script>
+</body>
+</html>
